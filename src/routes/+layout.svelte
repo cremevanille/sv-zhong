@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	let { children } = $props();
 </script>
 
@@ -10,9 +11,9 @@
 	</div>
 	<nav>
 		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="/yinxixue">yinxixue</a></li>
-			<li><a href="/cihai">cihai</a></li>
+			<li><a href="{base}/">Home</a></li>
+			<li><a href="{base}/yinxixue">yinxixue</a></li>
+			<li><a href="{base}/cihai">cihai</a></li>
 		</ul>
 	</nav>
 	<main>
