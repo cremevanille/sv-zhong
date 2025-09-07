@@ -3,6 +3,10 @@
 	let { children } = $props();
 </script>
 
+<svelte:head>
+	<link rel="icon" type="image/svg+xml" href="{base}/favicon.svg" />
+</svelte:head>
+
 <div id="body" style="display: contents">
 	<div class="icon" id="nav-icon">
 		<svg viewBox="0 0 10 10">
@@ -43,11 +47,7 @@
 		font-size: 20px; 
 	}
 
-	#body:has(#menu:hover, nav:hover) {
-		nav { left: 0; }
-		main { filter: opacity(.3); }
-	}
-
+	#nav-icon { position: fixed; }
 	.icon {
 		height: 3rem;
 		width: 3rem;
@@ -64,8 +64,6 @@
 			stroke-width: 1;
 		}
 	}
-	#nav-icon { position: fixed; }
-
 	nav {
 		position: fixed;
 		top: 0;
@@ -83,11 +81,10 @@
 		border-right: var(--bold-border);
 		box-sizing: border-box; 
 	}
-
-	#nav-icon:hover + nav,
-	nav:hover { left: 0; }
-	#nav-icon:hover ~ main,
-	nav:hover ~ main { filter: opacity(.3); }
+	#body:has(#menu:hover, nav:hover) {
+		nav { left: 0; }
+		main { filter: opacity(.3); }
+	}
 
 	main {
 		margin: 0 4rem 0 4rem;
