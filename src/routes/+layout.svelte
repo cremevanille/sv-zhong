@@ -5,48 +5,27 @@
 
 <svelte:head>
 	<link rel="icon" type="image/svg+xml" href="{base}/favicon.svg" />
+	<link rel="preload" href="{base}/NotoSans.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+	<link rel="preload" href="{base}/NotoSansSC.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
 </svelte:head>
 
-<div id="body" style="display: contents">
-	<div class="icon" id="nav-icon">
-		<svg viewBox="0 0 10 10">
-			<path d="M 0 .5 H 10 M 0 3.5 H 10 M 0 6.5 H 10 M 0 9.5 H 10"/>
-		</svg>
-	</div>
-	<nav>
-		<ul>
-			<li><a href="{base}/">Home</a></li>
-			<li><a href="{base}/yinxixue">yinxixue</a></li>
-			<li><a href="{base}/cihai">cihai</a></li>
-		</ul>
-	</nav>
-	<main>
-		{@render children?.()}
-	</main>
+<div class="icon" id="nav-icon">
+	<svg viewBox="0 0 10 10">
+		<path d="M 0 .5 H 10 M 0 3.5 H 10 M 0 6.5 H 10 M 0 9.5 H 10"/>
+	</svg>
 </div>
+<nav>
+	<ul>
+		<li><a href="{base}/">Home</a></li>
+		<li><a href="{base}/yinxixue">音系学</a></li>
+		<li><a href="{base}/cihai">辞海</a></li>
+	</ul>
+</nav>
+<main>
+	{@render children?.()}
+</main>
 
 <style>
-	:root { 
-		--black: #2c0006;
-		--grey: #989593;
-		--white: #faf9f3;
-		--red: #b82132;
-
-		--light: 200;
-		--regular: 400;
-		--bold: 600;
-
-		--border-size: 2px;
-		--border: var(--border-size) solid var(--red);
-		--bold-border-size: 3px;
-		--bold-border: var(--bold-border-size) solid var(--red);
-
-		color: var(--black);
-		background-color: var(--white);
-
-		font-size: 20px; 
-	}
-
 	#nav-icon { position: fixed; }
 	.icon {
 		height: 3rem;
@@ -81,7 +60,7 @@
 		border-right: var(--bold-border);
 		box-sizing: border-box; 
 	}
-	#body:has(#menu:hover, nav:hover) {
+	:global body:has(#nav-icon:hover, nav:hover) {
 		nav { left: 0; }
 		main { filter: opacity(.3); }
 	}
