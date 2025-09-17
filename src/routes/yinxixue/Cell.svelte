@@ -1,27 +1,33 @@
 <script>
-    import { selection, available, search } from './data.svelte.js';
-    const { name, id, label } = $props();
+    import { syllabary } from './syllabary.js';
+    import { selection, search } from './data.svelte.js';
+    const { type, id, label } = $props();
+    const other = type == 'initial' ? 'final' : 'initial';
+
+    const available = $derived(
+        selection[other] == undefined
+        || syllabary.find(syl => {
+            return (syl[type] == id && syl[other] == selection[other]);
+        }) !== undefined
+    );
 </script>
 
-<label
-    class={ available(name, id) ? '' : 'shadow ' }
->
+<label class:shadow={!available}>
     {label}
     <input 
         type="radio"
-        {name}
         value={id}
-        bind:group={selection[name]}
-        onclick={e => {
+        bind:group={selection[type]}
+        onclick={ () => {
             search.value = '';
-            if (selection[name] == id) {
-                selection[name] = undefined;
-            } else if (!available(name, id)) {
-                const other = name == 'initial' ? 'final' : 'initial';
+            if (selection[type] == id) {
+                selection[type] = undefined;
+            } else if (!available) {
                 selection[other] = undefined;
             }
-        }}
-        />
+            if (type == "final" && id < 0) selection.initial = -1;
+        } }
+    />
 </label>
 
 <style>
@@ -30,15 +36,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-    label:not(:has(:checked)):hover {
-        box-sizing: border-box;
-        border: var(--border);
-    }
-    label:has(:checked) {
-        border: var(--bold-border);
-    }
-    label.shadow {
-        font-weight: var(--light); color: var(--grey);
+        &:not(:has(:checked)):hover {
+            box-sizing: border-box;
+            border: var(--border);
+        }
+        &:has(:checked) {
+            border: var(--bold-border);
+        }
+        &.shadow {
+            font-weight: var(--light); 
+            color: var(--grey);
+        }
     }
 </style>

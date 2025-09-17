@@ -1,6 +1,7 @@
 <script>
 	import { base } from '$app/paths';
-	let { children } = $props();
+	import './layout.css';
+	const { children } = $props();
 </script>
 
 <svelte:head>
@@ -64,7 +65,6 @@
 		nav { left: 0; }
 		main { filter: opacity(.3); }
 	}
-
 	main {
 		margin: 0 4rem 0 4rem;
     	transition: filter .3s ease-in-out;
